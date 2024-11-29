@@ -30,6 +30,8 @@ module.exports = {
                 'input-bg': '#27272a',
                 'input-hover-bg': '#3f3f46',
                 'input-outline': '#006fee',
+                'red': '#E2001A',
+                'gray': '#BCBDBE',
             },
         },
     },
@@ -40,7 +42,7 @@ module.exports = {
                 dark: {
                     colors: {
                         danger: {
-                            DEFAULT: 'rgb(239 68 68)',
+                            DEFAULT: '#E2001A',
                         },
                     },
                 },

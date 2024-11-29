@@ -1,1 +1,0 @@
-export { NumberAnimation } from './AnimatedNumber';

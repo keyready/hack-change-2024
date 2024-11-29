@@ -30,7 +30,10 @@ export const App = () => {
             <div className={classNames('app', {}, [theme])}>
                 <Suspense fallback="">
                     <Navbar />
+                    {/* <HStack maxW> */}
+                    {/*     <Sidebar /> */}
                     <AppRouter />
+                    {/* </HStack> */}
                     <Toaster />
                 </Suspense>
             </div>

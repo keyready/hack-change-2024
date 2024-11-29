@@ -1,0 +1,20 @@
+.FilterButtons {
+	flex-wrap: wrap;
+}
+
+.option {
+	outline: 0.5px solid #BCBDBE;
+	padding: 5px 15px;
+	transition: 200ms;
+	border-radius: 4px;
+
+	&:hover {
+		outline: 0.5px solid #E2001A;
+	box-shadow: 0 4px 4px 0 #E2001A40;
+	}
+}
+
+.selected {
+	color: white;
+	background: #E2001A;
+}
