@@ -56,10 +56,12 @@
         "vite-plugin-svgr": "^4.2.0"
     },
     "dependencies": {
+        "@dagrejs/dagre": "^1.1.4",
         "@marsidev/react-turnstile": "^1.0.2",
         "@nextui-org/react": "^2.4.6",
         "@reduxjs/toolkit": "^1.8.0",
         "@remixicon/react": "^4.2.0",
+        "@xyflow/react": "^12.3.5",
         "axios": "1.6.0",
         "framer-motion": "^11.3.21",
         "query-string": "^9.1.0",
@@ -73,7 +75,6 @@
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.2.1",
         "react-tag-autocomplete": "^7.3.0",
-        "react-tree-graph": "^8.0.2",
         "react-window": "^1.8.10",
         "react-yandex-metrika": "^2.6.0",
         "swiper": "^11.1.9",
