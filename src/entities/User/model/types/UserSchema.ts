@@ -1,11 +1,10 @@
-import { AuthErrorTypes, MembersFilters, User } from './User';
+import { AuthErrorTypes, User, UserRoles } from './User';
 
 export interface UserSchema {
     data?: User;
+    roles?: UserRoles[];
     isLoading: boolean;
-    isProfileChanging?: boolean;
+    isAuthLoading: boolean;
     error?: string;
     authError?: AuthErrorTypes;
-    selectedProfile?: User;
-    filters?: MembersFilters;
 }

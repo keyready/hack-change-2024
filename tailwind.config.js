@@ -39,7 +39,7 @@ module.exports = {
     plugins: [
         nextui({
             themes: {
-                dark: {
+                light: {
                     colors: {
                         danger: {
                             DEFAULT: '#E2001A',

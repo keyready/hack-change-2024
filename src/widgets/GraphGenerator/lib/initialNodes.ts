@@ -10,15 +10,8 @@ export function transformData(input: any) {
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
-    function getColorByLevel(level: number) {
-        const colors = ['yellow', 'blue', 'green', 'orange', 'pink', 'purple', 'red'];
-        return colors[level] || 'gray';
-    }
-
     function traverseTree(node: SourceNodesMap, parentId: number | null = null, level: number = 0) {
         const currentNodeId = (nodeId += 1);
-
-        const color = getColorByLevel(level);
 
         let type = '';
         if (parentId === null) {
@@ -34,7 +27,9 @@ export function transformData(input: any) {
             data: { label: node.name },
             position: { x: 0, y: 0 },
             style: {
-                background: color,
+                border: '2px solid #F52121',
+                background: '#F5212111',
+                borderRadius: '12px',
             },
             type,
         });
@@ -47,6 +42,10 @@ export function transformData(input: any) {
                     source: currentNodeId.toString(),
                     target: childNodeId.toString(),
                     type: 'step',
+                    style: {
+                        strokeWidth: 1,
+                        stroke: '#F5212144',
+                    },
                 });
             });
         }

@@ -3,13 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSchema } from '../types/UserSchema';
 import { signupUser } from '../services/authServices/signupUser';
 import { loginUser } from '../services/authServices/loginUser';
-import { AuthErrorTypes, MembersFilters, User } from '../types/User';
+import { AuthErrorTypes, User } from '../types/User';
 import { getUserDataService } from '../services/profileServices/getUserData';
-import { getProfileData } from '../services/profileServices/getProfileData';
-import { sendRecoveryLink } from '../services/authServices/sendRecoveryLink';
 import { changePassword } from '../services/authServices/changePassword';
-import { confirmEmail } from '../services/authServices/confirmEmail';
-import { changeUserProfile } from '../services/profileServices/changeUserProfile';
 import { logoutService } from '../services/authServices/logoutService';
 
 import { USER_ACCESS_TOKEN, USER_REFRESH_TOKEN } from '@/shared/const';
@@ -17,20 +13,14 @@ import { USER_ACCESS_TOKEN, USER_REFRESH_TOKEN } from '@/shared/const';
 const initialState: UserSchema = {
     data: undefined,
     isLoading: false,
+    isAuthLoading: false,
     error: undefined,
-    selectedProfile: undefined,
-    filters: {
-        isMember: true
-    }
 };
 
 export const UserSlice = createSlice({
     name: 'UserSlice',
     initialState,
     reducers: {
-        setMembersFilters: (state, action: PayloadAction<MembersFilters>) => {
-            state.filters = action.payload;
-        },
         clearAuthError: (state) => {
             state.authError = undefined;
         },
@@ -48,13 +38,13 @@ export const UserSlice = createSlice({
         builder
             .addCase(signupUser.pending, (state) => {
                 state.error = undefined;
-                state.isLoading = true;
+                state.isAuthLoading = true;
             })
             .addCase(signupUser.fulfilled, (state) => {
-                state.isLoading = false;
+                state.isAuthLoading = false;
             })
             .addCase(signupUser.rejected, (state, action) => {
-                state.isLoading = false;
+                state.isAuthLoading = false;
                 state.authError = action.payload as AuthErrorTypes;
             })
 
@@ -73,38 +63,14 @@ export const UserSlice = createSlice({
 
             .addCase(loginUser.pending, (state) => {
                 state.error = undefined;
-                state.isLoading = true;
+                state.isAuthLoading = true;
             })
             .addCase(loginUser.fulfilled, (state) => {
-                state.isLoading = false;
+                state.isAuthLoading = false;
             })
             .addCase(loginUser.rejected, (state, action) => {
-                state.isLoading = false;
+                state.isAuthLoading = false;
                 state.authError = action.payload as AuthErrorTypes;
-            })
-
-            .addCase(sendRecoveryLink.pending, (state) => {
-                state.error = undefined;
-                state.isLoading = true;
-            })
-            .addCase(sendRecoveryLink.fulfilled, (state) => {
-                state.isLoading = false;
-            })
-            .addCase(sendRecoveryLink.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload;
-            })
-
-            .addCase(changeUserProfile.pending, (state) => {
-                state.error = undefined;
-                state.isProfileChanging = true;
-            })
-            .addCase(changeUserProfile.fulfilled, (state) => {
-                state.isProfileChanging = false;
-            })
-            .addCase(changeUserProfile.rejected, (state, action) => {
-                state.isProfileChanging = false;
-                state.error = action.payload;
             })
 
             .addCase(changePassword.pending, (state) => {
@@ -115,18 +81,6 @@ export const UserSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(changePassword.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload;
-            })
-
-            .addCase(confirmEmail.pending, (state) => {
-                state.error = undefined;
-                state.isLoading = true;
-            })
-            .addCase(confirmEmail.fulfilled, (state) => {
-                state.isLoading = false;
-            })
-            .addCase(confirmEmail.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })
@@ -144,19 +98,6 @@ export const UserSlice = createSlice({
                 localStorage.removeItem(USER_REFRESH_TOKEN);
                 state.isLoading = false;
                 state.data = undefined;
-                state.error = action.payload;
-            })
-
-            .addCase(getProfileData.pending, (state) => {
-                state.error = undefined;
-                state.isLoading = true;
-            })
-            .addCase(getProfileData.fulfilled, (state, action: PayloadAction<User>) => {
-                state.isLoading = false;
-                state.selectedProfile = action.payload;
-            })
-            .addCase(getProfileData.rejected, (state, action) => {
-                state.isLoading = false;
                 state.error = action.payload;
             });
     },

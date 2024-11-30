@@ -1,6 +1,6 @@
 export interface Tokens {
-    access_token: string;
-    refresh_token: string;
+    accessToken: string;
+    refreshToken: string;
 }
 
 export enum UserRoles {
@@ -9,12 +9,22 @@ export enum UserRoles {
     LEAD = 'lead',
 }
 
+export enum AuthErrorTypes {
+    BAD_CREDENTIALS = 'bad_credentials',
+    NOT_FOUND = 'not_found',
+    USER_EXIST = 'user_exist',
+}
+
 export interface ServerUser {
     id: number;
 
     mail: string;
     phone: string;
     password: string;
+
+    firstname: string;
+    lastname: string;
+    position: string;
 }
 
 export type User = Partial<ServerUser>;

@@ -10,14 +10,24 @@ import { FilterButtons, Option } from '@/shared/ui/FilterButtons';
 
 interface SearchInputDropdownProps {
     className?: string;
+    searchValue: string;
+    onSearchValueChange: (str: string) => void;
+    selectedFilter: Option | undefined;
+    onSelectedFilterChange: (opt: Option) => void;
+    placeholder?: string;
 }
 
 export const SearchInputDropdown = (props: SearchInputDropdownProps) => {
-    const { className } = props;
+    const {
+        className,
+        onSelectedFilterChange,
+        selectedFilter,
+        onSearchValueChange,
+        searchValue,
+        placeholder,
+    } = props;
 
     const [isInFocus, setIsInFocus] = useState<boolean>(false);
-
-    const [selectedFilter, setSelectedFilter] = useState<Option>();
 
     const mods: Mods = {
         [classes.overlayActive]: isInFocus,
@@ -27,9 +37,11 @@ export const SearchInputDropdown = (props: SearchInputDropdownProps) => {
         <>
             <VStack maxW className={`w-2/3 relative ${isInFocus ? 'z-[150]' : ''}`}>
                 <Input
+                    value={searchValue}
+                    onChange={(ev) => onSearchValueChange(ev.target.value)}
                     onFocus={() => setIsInFocus(true)}
                     startContent={<RiSearchLine color="#BCBDBE" />}
-                    placeholder="Поиск специалистов"
+                    placeholder={placeholder || 'Поиск специалистов'}
                     classNames={{
                         inputWrapper: isInFocus ? 'rounded-b-none' : '',
                     }}
@@ -42,7 +54,7 @@ export const SearchInputDropdown = (props: SearchInputDropdownProps) => {
                 >
                     <div className="px-10 py-4 border-t-2 border-[#BCBDBE] w-full">
                         <FilterButtons
-                            onOptionChange={setSelectedFilter}
+                            onOptionChange={onSelectedFilterChange}
                             selectedOption={selectedFilter}
                             options={[
                                 { label: 'Курсанты', value: 'cadets' },
@@ -53,6 +65,12 @@ export const SearchInputDropdown = (props: SearchInputDropdownProps) => {
                                 { label: 'СММ-щики', value: 'smm' },
                                 { label: 'Пиарщики', value: 'pr' },
                                 { label: 'Аналитики', value: 'analytics' },
+                                { label: 'Уборщики', value: 'cleaning' },
+                                { label: 'Строители', value: 'workers' },
+                                { label: 'КПП № 6', value: 'kpp' },
+                                { label: 'ВГ 13', value: 'vg' },
+                                { label: 'БПЛА ВИНИ 4', value: 'bpla' },
+                                { label: 'ПДА ТСО', value: 'pda' },
                             ]}
                         />
                     </div>

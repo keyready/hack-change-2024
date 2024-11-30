@@ -12,14 +12,14 @@ export const loginUser = createAsyncThunk<Tokens, User, ThunkConfig<string>>(
         const { extra, rejectWithValue } = thunkAPI;
 
         try {
-            const response = await extra.api.post<Tokens>('/api/auth/login', newUser);
+            const response = await extra.api.post<Tokens>('/api/auth/sign-in', newUser);
 
             if (response.status > 300) {
                 throw new Error();
             }
 
-            localStorage.setItem(USER_ACCESS_TOKEN, response.data.access_token);
-            localStorage.setItem(USER_REFRESH_TOKEN, response.data.refresh_token);
+            localStorage.setItem(USER_ACCESS_TOKEN, response.data.accessToken);
+            localStorage.setItem(USER_REFRESH_TOKEN, response.data.refreshToken);
 
             return response.data;
         } catch (e) {
