@@ -1,0 +1,39 @@
+services:
+  server:
+    container_name: hackchange-server-2024
+    build:
+      context: ./server
+      dockerfile: Dockerfile.server.dev
+    volumes:
+      - ./server:/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: hackchange-db-2024
+    environment:
+      POSTGRES_DB: hackchange2024
+      POSTGRES_USER: k0fanov36
+      POSTGRES_PASSWORD: k0fanov36
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    image: dpage/pgadmin4:4.23
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_LISTEN_PORT: 15432
+    ports:
+      - 15432:15432
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    depends_on:
+      - db
+
+volumes:
+  postgres:
+  pgadmin:
