@@ -1,8 +1,9 @@
 import { Edge, Node } from '@xyflow/react';
 
-interface SourceNodesMap {
+export interface SourceNodesMap {
     name: string;
     children: SourceNodesMap[];
+    [key: string]: any;
 }
 
 export function transformData(input: any) {
@@ -24,7 +25,15 @@ export function transformData(input: any) {
 
         nodes.push({
             id: currentNodeId.toString(),
-            data: { label: node.name },
+            data: {
+                label: node.name,
+                name: `${node.firstname} ${node.middlename} ${node.lastname}`,
+                address: 'node.address',
+                department: 'node.department',
+                division: 'node.division',
+                position: 'node.position',
+                phone: 'node.phone',
+            },
             position: { x: 0, y: 0 },
             style: {
                 border: '2px solid #F52121',

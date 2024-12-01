@@ -16,8 +16,8 @@ export const Skeleton = (props: SkeletonProps) => {
             width={width}
             height={height}
             viewBox={`0 0 ${width} ${height}`}
-            backgroundColor="#808080"
-            foregroundColor="#444"
+            backgroundColor="#fdfdfd"
+            foregroundColor="#E2001A30"
             className={className}
         >
             <rect x="0" y="0" rx={rounded} ry={rounded} width="100%" height="100%" />
