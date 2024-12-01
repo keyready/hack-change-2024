@@ -16,4 +16,10 @@
   - `cd client`
   - `npm ci`
   - `npm run dev`
-- [ ] Демо проекта в каталоге `/demo`
+- [ ] Демо проекта на [Яндекс.Диск](https://disk.yandex.ru/d/occ7hkTydWrwIQ)
+
+### 🕺 Команда
+- [ ] [Дмитрий Поляков](https://t.me/operculum) — UI/UX
+- [ ] [Валентин Кофанов](https://t.me/v666k0) — Backend Dev
+- [ ] [Антон Терещенко](https://t.me/Tokumura) — Mobile Dev
+- [ ] [Родион Корчак](https://t.me/keyrea_dy) — Frontend Dev
