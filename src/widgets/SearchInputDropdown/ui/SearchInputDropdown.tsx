@@ -1,6 +1,7 @@
 import { RiSearchLine } from '@remixicon/react';
 import { Input } from '@nextui-org/react';
 import { useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import classes from './SearchInputDropdown.module.scss';
 
@@ -25,10 +26,12 @@ export const SearchInputDropdown = (props: SearchInputDropdownProps) => {
 
     const [isInFocus, setIsInFocus] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>('');
-    const [selectedFilter, setSelectedFilter] = useState<Option>();
+    const [selectedFilter, setSelectedFilter] = useState<Option | undefined>();
+
+    const [debouncedSearchValue] = useDebounce(searchValue, 500);
 
     const { data: searchResults, isLoading: isSearchLoading } = useSearchResults({
-        search: searchValue,
+        search: debouncedSearchValue,
         position: selectedFilter?.label || '',
     });
 

@@ -14,7 +14,7 @@ interface FilterButtonsProps {
     className?: string;
     options?: Option[];
     isLoading?: boolean;
-    onOptionChange: (opt: Option) => void;
+    onOptionChange: (opt: Option | undefined) => void;
     selectedOption?: Option;
 }
 
@@ -25,10 +25,14 @@ export const FilterButtons = (props: FilterButtonsProps) => {
 
     const handleFilterSelect = useCallback(
         (opt: Option) => {
-            onOptionChange(opt);
-            setCutFilters(true);
+            if (selectedOption?.value === opt.value) {
+                onOptionChange(undefined);
+            } else {
+                onOptionChange(opt);
+                setCutFilters(true);
+            }
         },
-        [onOptionChange],
+        [onOptionChange, selectedOption],
     );
 
     const isSelectedFilterHidden = useMemo(

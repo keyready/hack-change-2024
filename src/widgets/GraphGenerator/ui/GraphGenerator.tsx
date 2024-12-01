@@ -11,12 +11,13 @@ import { Image, Modal, ModalContent } from '@nextui-org/react';
 import { RiPhoneLine, RiUser2Line } from '@remixicon/react';
 import { useSelector } from 'react-redux';
 
-import { rawData, SourceNodesMap, transformData } from '../lib/initialNodes';
+import { SourceNodesMap, transformData } from '../lib/initialNodes';
 
 import { classNames } from '@/shared/lib/classNames';
 import { useNode } from '@/entities/Node';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { getUserData } from '@/entities/User';
+import { Spinner } from '@/shared/ui/Spinner';
 
 const dagreGraph = new dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
@@ -70,7 +71,7 @@ export const GraphGenerator = (props: GraphGeneratorProps) => {
 
     const { data: rawNodesData, isLoading: isNodesLoading } = useNode();
 
-    const { edges: formattedEdges, nodes: formattedNodes } = transformData(rawData || []);
+    const { edges: formattedEdges, nodes: formattedNodes } = transformData(rawNodesData || []);
 
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
         formattedNodes,
@@ -95,13 +96,17 @@ export const GraphGenerator = (props: GraphGeneratorProps) => {
         }
     }, []);
 
-    // if (isNodesLoading) {
-    //     return (
-    //         <div className={classNames('w-full h-screen', {}, [className])}>
-    //             <Spinner />
-    //         </div>
-    //     );
-    // }
+    if (isNodesLoading) {
+        return (
+            <div
+                className={classNames('flex justify-center items-center w-full h-screen', {}, [
+                    className,
+                ])}
+            >
+                <Spinner height="128px" width="128px" fill="#E2001A" />
+            </div>
+        );
+    }
 
     return (
         <div className={classNames('w-full h-screen', {}, [className])}>
